@@ -36,25 +36,25 @@
 					"icon": "📊",
 					"selectedIcon": "📈",
 					"text": this.$t('tabbar.system_status'),
-					"pagePath":"/pages/device/status"
+					"pagePath":"/pages/openwrt/status"
 				},
 				{
 					"icon": "👥",
 					"selectedIcon": "👤",
 					"text": this.$t('tabbar.client_list'),
-					"pagePath":"/pages/device/client"
+					"pagePath":"/pages/openwrt/client"
 				},
 				{
 					"icon": "👨‍💻",
 					"selectedIcon": "👨‍💼",
 					"text": this.$t('tabbar.user_list'),
-					"pagePath":"/pages/device/user_list"
+					"pagePath":"/pages/openwrt/user_list"
 				},
 				{
 					"icon": "⚙️",
 					"selectedIcon": "🔧",
 					"text": this.$t('tabbar.advanced_settings'),
-					"pagePath":"/pages/device/settings"
+					"pagePath":"/pages/openwrt/settings"
 				}
 			];
 			

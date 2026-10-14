@@ -1,7 +1,4 @@
 import App from './App'
-
-
-// 国际化配置
 import en from './locale/en.json'
 import zhHans from './locale/zh-Hans.json'
 
@@ -12,19 +9,19 @@ const messages = {
 
 function getDefaultLocale() {
   try {
-
     const storedLocale = uni.getStorageSync('locale')
+    console.log('[Language] Stored locale from storage:', storedLocale)
 
     if (storedLocale) {
+      console.log('[Language] Using stored locale:', storedLocale)
       return storedLocale
     }
   } catch (error) {
-    console.log("error", error)
+    console.log('[Language] Failed to get stored locale:', error)
   }
-  
-  var locale = uni.getLocale()
 
-  
+  // Get system language
+  var locale = uni.getLocale()
   let result
   if (locale == 'zh-Hans') {
     result = 'zh-Hans'
@@ -32,6 +29,7 @@ function getDefaultLocale() {
     result = 'en'
   }
   
+  console.log('[Language] Final selected locale:', result)
   return result
 }
 

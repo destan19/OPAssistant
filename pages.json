@@ -6,52 +6,64 @@
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%device_list.title%",
-		        "enablePullDownRefresh": false
+		        "enablePullDownRefresh": false,
+		        "navigationStyle": "custom"
 		    }
 		},
 		{
-		    "path" : "pages/device/home",
+		    "path" : "pages/openwrt/home",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%home.title%",
-		        "enablePullDownRefresh": false
+		        "enablePullDownRefresh": false,
+		        "navigationStyle": "custom",
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
 		    }
 		},
 		{
-		    "path" : "pages/device/network",
+		    "path" : "pages/openwrt/network",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%network.title%",
-		        "enablePullDownRefresh": false
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
 		    }
 		},
 		{
-		    "path" : "pages/device/statistics",
+		    "path" : "pages/openwrt/statistics",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%statistics.title%",
-		        "enablePullDownRefresh": false
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
 		    }
 		},
 		{
-		    "path" : "pages/device/client",
+		    "path" : "pages/openwrt/client",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%client.title%",
-		        "enablePullDownRefresh": false
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
 		    }
 		},
 		{
-		    "path" : "pages/device/apps",
+		    "path" : "pages/openwrt/apps",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%apps.title%",
-		        "enablePullDownRefresh": false
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
 		    }
 		},
 
 		{
-		    "path" : "pages/device/apps/reboot/index",
+		    "path" : "pages/openwrt/apps/reboot/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%reboot.title%",
@@ -59,7 +71,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/factory_reset/index",
+		    "path" : "pages/openwrt/apps/factory_reset/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%factory_reset.title%",
@@ -68,7 +80,7 @@
 		},
 
 		{
-		    "path" : "pages/device/apps/parental_control/index",
+		    "path" : "pages/openwrt/apps/parental_control/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%parental_control.title%",
@@ -76,7 +88,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/parental_control/basic_settings",
+		    "path" : "pages/openwrt/apps/parental_control/basic_settings",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%parental_control.basic_settings%",
@@ -84,7 +96,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/parental_control/app_filter_rules",
+		    "path" : "pages/openwrt/apps/parental_control/app_filter_rules",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%parental_control.app_filter%",
@@ -92,7 +104,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/parental_control/advanced_settings",
+		    "path" : "pages/openwrt/apps/parental_control/advanced_settings",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%parental_control.advanced_settings%",
@@ -100,7 +112,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/parental_control/parental_control_about",
+		    "path" : "pages/openwrt/apps/parental_control/parental_control_about",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%parental_control_about.title%",
@@ -108,7 +120,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/process/index",
+		    "path" : "pages/openwrt/apps/process/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%process.title%",
@@ -116,7 +128,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/startup/index",
+		    "path" : "pages/openwrt/apps/startup/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%startup.title%",
@@ -124,7 +136,7 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/apps/route/index",
+		    "path" : "pages/openwrt/apps/route/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%route.title%",
@@ -132,11 +144,95 @@
 		    }
 		},
 		{
-		    "path" : "pages/device/client_detail",
+		    "path" : "pages/openwrt/client_detail",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "%client_detail.title%",
 		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/fanchmwrt/dashboard",
+		    "style" : { "navigationBarTitleText": "FanchmWrt", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/monitor",
+		    "style" : { "navigationBarTitleText": "监控", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/terminal",
+		    "style" : { "navigationBarTitleText": "终端", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/network",
+		    "style" : { "navigationBarTitleText": "网络", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/more",
+		    "style" : { "navigationBarTitleText": "更多", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/app_filter",
+		    "style" : { "navigationBarTitleText": "应用过滤", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/app_filter_edit",
+		    "style" : { "navigationBarTitleText": "过滤规则", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/mac_filter",
+		    "style" : { "navigationBarTitleText": "MAC过滤", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/mac_filter_edit",
+		    "style" : { "navigationBarTitleText": "编辑规则", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/blacklist",
+		    "style" : { "navigationBarTitleText": "上网黑名单", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/internet_records",
+		    "style" : { "navigationBarTitleText": "上网记录", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/app_record",
+		    "style" : { "navigationBarTitleText": "应用记录", "enablePullDownRefresh": false, "navigationStyle": "custom" }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/network",
+		    "style" : {
+		        "navigationBarTitleText": "%network.title%",
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
+		    }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/route/index",
+		    "style" : {
+		        "navigationBarTitleText": "%route.title%",
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
+		    }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/factory_reset/index",
+		    "style" : {
+		        "navigationBarTitleText": "%factory_reset.title%",
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
+		    }
+		},
+		{
+		    "path" : "pages/fanchmwrt/apps/reboot/index",
+		    "style" : {
+		        "navigationBarTitleText": "%reboot.title%",
+		        "enablePullDownRefresh": false,
+		        "navigationBarTextStyle": "black",
+		        "navigationBarBackgroundColor": "#F8F8F8"
 		    }
 		},
 		{
@@ -157,10 +253,19 @@
 		},
 		{
 		    "path" : "pages/language/index",
-		    "style" :                                                                                    
+		    "style" :
 		    {
 		        "navigationBarTitleText": "%language.title%",
 		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/single/login",
+		    "style" :
+		    {
+		        "navigationBarTitleText": "%single_login.title%",
+		        "enablePullDownRefresh": false,
+		        "navigationStyle": "custom"
 		    }
 		}
 
@@ -173,31 +278,31 @@
 					"iconPath":"static/home.png",
 					"selectedIconPath":"static/home-selected.png",
 					"text":"home",
-					"pagePath":"pages/device/home"
+					"pagePath":"pages/openwrt/home"
 				},
 				{
 					"iconPath":"static/align-bottom.png",
 					"selectedIconPath":"static/align-bottom-selected.png",
 					"text":"statistics",
-					"pagePath":"pages/device/statistics"
+					"pagePath":"pages/openwrt/statistics"
 				},
 				{
 					"iconPath":"static/user.png",
 					"selectedIconPath":"static/user-selected.png",
 					"text":"client",
-					"pagePath":"pages/device/client"
+					"pagePath":"pages/openwrt/client"
 				},
 				{
 					"iconPath":"static/network.png",
 					"selectedIconPath":"static/network-selected.png",
 					"text":"network",
-					"pagePath":"pages/device/network"
+					"pagePath":"pages/openwrt/network"
 				},
 				{
 					"iconPath":"static/system.png",
 					"selectedIconPath":"static/system-selected.png",
 					"text":"apps",
-					"pagePath":"pages/device/apps"
+					"pagePath":"pages/openwrt/apps"
 				}
 		]
 	},

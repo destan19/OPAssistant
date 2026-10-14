@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 31" fill="none">
+  <!-- Single connected path: wide housing on top + narrow tab below, no dividing line -->
+  <path d="M 3.5,1 H 28.5 Q 31,1 31,3.5 V 20 H 23 V 28.5 Q 23,30 21.5,30 H 10.5 Q 9,30 9,28.5 V 20 H 1 V 3.5 Q 1,1 3.5,1 Z" stroke="#34c759" stroke-width="2"/>
+  <!-- 8 contact pins -->
+  <line x1="5"  y1="4" x2="5"  y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="8"  y1="4" x2="8"  y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="11" y1="4" x2="11" y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="14" y1="4" x2="14" y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="18" y1="4" x2="18" y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="21" y1="4" x2="21" y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="24" y1="4" x2="24" y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="27" y1="4" x2="27" y2="17" stroke="#34c759" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

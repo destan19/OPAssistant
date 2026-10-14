@@ -2,8 +2,8 @@
     "name" : "OPAssistant",
     "appid" : "__UNI__000000",
     "description" : "OpenWrt assistant",
-    "versionName" : "1.0.6",
-    "versionCode" : 106,
+    "versionName" : "1.1.0",
+    "versionCode" : 1100,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -16,7 +16,8 @@
             "delay" : 0
         },
         "ssl" : {
-            "untrustedca" : "accept"
+            "untrustedca" : "accept",
+            "verify" : false
         },
 
         "modules" : {},
@@ -97,11 +98,15 @@
                     "secure" : false
                 }
             }
+        },
+        "router" : {
+            "mode" : "hash"
         }
     },
     "uniStatistics" : {
         "enable" : false
     },
     "vueVersion" : "2",
-    "locale" : "zh-Hans"
+    "locale" : "auto",
+    "fallbackLocale" : "en"
 }

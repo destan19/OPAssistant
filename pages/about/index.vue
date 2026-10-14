@@ -33,7 +33,7 @@
 export default {
 	data() {
 		return {
-			version: '1.0.6'
+			version: '1.1.0'
 		}
 	},
 	onLoad() {
@@ -123,4 +123,4 @@ export default {
 	line-height: 1.6;
 	display: block;
 }
-</style> 
+</style>

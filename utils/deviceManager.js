@@ -1,5 +1,6 @@
 
 import Crypto from './crypto.js'
+import { APP_MODE } from '@/config/appMode.js'
 
 const DEVICE_LIST_KEY = 'device_list'
 const CURRENT_DEVICE_KEY = 'current_device'
@@ -7,6 +8,7 @@ const CURRENT_DEVICE_KEY = 'current_device'
 const ERROR_CODES = {
 	NETWORK_ERROR: 4000,        
 	AUTH_ERROR: 4001,             
+	CERTIFICATE_ERROR: 4003,
 	OTHER_ERROR: 4002           
 }
 
@@ -239,11 +241,16 @@ class DeviceManager {
 		
 		uni.request({
 			url: url,
+			header:{
+				'x-uniauth': 'true',
+				'Content-Type': 'application/json;charset=UTF-8' 
+			},
+			sslVerify: false,
 			method: 'POST',
 			data: data,
 			timeout: 3000,
 			success: (res) => {
-				console.log(`[DeviceManager] Login response status code: ${res.statusCode}`)
+				console.log(`[DeviceManager]222 Login response status code: ${res.statusCode}`)
 				console.log(`[DeviceManager] Login response data:`, JSON.stringify(res.data, null, 2))
 				
 				// Check response status code
@@ -308,26 +315,38 @@ class DeviceManager {
 					}
 				}
 			},
-			fail: (err) => {
-				console.error(`[DeviceManager] Login request failed:`, err)
-				console.error(`[DeviceManager] Error details:`, {
-					errMsg: err.errMsg,
-					errno: err.errno,
-					statusCode: err.statusCode
-				})
-				
-				// Handle WeChat mini-program specific errors
-				let errorMessage = 'Network error, if it\'s a mini-program please keep on the same network segment as the router' + err.errMsg
-				
-				// Call failure callback
-				if (callback) {
-					console.log(`[DeviceManager] Calling failure callback, error code: ${ERROR_CODES.NETWORK_ERROR}`)
-					callback({
-						success: false,
-						errorCode: ERROR_CODES.NETWORK_ERROR,
-					})
+		fail: (err) => {
+			console.error(`[DeviceManager] Login request failed:`, err)
+			console.error(`[DeviceManager] Error details:`, {
+				errMsg: err.errMsg,
+				errno: err.errno,
+				statusCode: err.statusCode
+			})
+			
+			// Check for certificate error
+			let errorCode = ERROR_CODES.NETWORK_ERROR
+			if (err.errMsg) {
+				const errMsg = err.errMsg.toLowerCase()
+				// Check for certificate-related error messages
+				// Look for: "certificate", "invalid", error code -1202, or statusCode -1 with certificate mention
+				if (errMsg.includes('certificate') || 
+					(errMsg.includes('invalid') && (errMsg.includes('server') || errMsg.includes('risk'))) ||
+					errMsg.includes('-1202') ||
+					(err.statusCode === -1 && (errMsg.includes('certificate') || errMsg.includes('pretending')))) {
+					errorCode = ERROR_CODES.CERTIFICATE_ERROR
+					console.log(`[DeviceManager] Certificate error detected`)
 				}
 			}
+			
+			// Call failure callback
+			if (callback) {
+				console.log(`[DeviceManager] Calling failure callback, error code: ${errorCode}`)
+				callback({
+					success: false,
+					errorCode: errorCode,
+				})
+			}
+		}
 		})
 	}
 	
@@ -384,6 +403,7 @@ class DeviceManager {
 	 * Send authenticated request
 	 */
 	static async requestWithAuth(device, url, options = {}) {
+		console.log("requestWithAuth url: " + url)
 		try {
 			// Check and ensure login status
 			const loginResult = await this.checkAndLoginDevice(device)
@@ -400,11 +420,14 @@ class DeviceManager {
 			return new Promise((resolve, reject) => {
 				uni.request({
 					url: url,
+	sslVerify: false,
 					method: options.method || 'GET',
 					data: options.data || {},
 					timeout: 3000,
 					header: {
 						'Cookie': cookieString,
+						'x-uniauth': 'true',
+
 						'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
 						...options.header
 					},
@@ -431,6 +454,76 @@ class DeviceManager {
 		return this.saveDeviceList(testDevices)
 	}
 	
+	/**
+	 * Fixed device ID for H5 single-user mode
+	 */
+	static H5_SINGLE_DEVICE_ID = 'h5_single'
+
+	/**
+	 * Resolve the page that should be used when leaving a router dashboard.
+	 * H5 single mode stores its router with H5_SINGLE_DEVICE_ID, so a normal
+	 * multi-device router should still return to the device list even if an
+	 * old H5 bundle or stale state reports h5_single.
+	 */
+	static getEntryUrl(device = null) {
+		const currentDevice = device || this.getCurrentDevice()
+		if (APP_MODE === 'h5_single') {
+			if (!currentDevice || currentDevice.id === this.H5_SINGLE_DEVICE_ID) {
+				return '/pages/single/login'
+			}
+		}
+		return '/pages/device_list'
+	}
+
+	/**
+	 * Login for H5 single-user mode.
+	 * Accepts raw (unencrypted) credentials. Stores the device with
+	 * the fixed H5_SINGLE_DEVICE_ID so subsequent calls can look it up.
+	 */
+	static loginH5Single({ ip, port, useHttps, username, password }, callback) {
+		const protocol = useHttps ? 'https' : 'http'
+		const formattedHost = this.formatHostForUrl(ip)
+		const url = `${protocol}://${formattedHost}:${port}/ubus`
+		uni.request({
+			url,
+			method: 'POST',
+			header: { 'x-uniauth': 'true', 'Content-Type': 'application/json;charset=UTF-8' },
+			sslVerify: false,
+			timeout: 5000,
+			data: {
+				jsonrpc: '2.0', id: 1, method: 'call',
+				params: ['00000000000000000000000000000000', 'session', 'login', { username, password }]
+			},
+			success: (res) => {
+				if (res.statusCode === 200 && res.data && res.data.result && res.data.result[0] === 0) {
+					const session = res.data.result[1].ubus_rpc_session
+					const deviceBase = {
+						id: this.H5_SINGLE_DEVICE_ID,
+						name: ip, ip, port, useHttps, username,
+						sysauth: session, online: true,
+						createTime: new Date().toISOString()
+					}
+					// Store in device list with encrypted password
+					const list = this.getDeviceList().filter(d => d.id !== this.H5_SINGLE_DEVICE_ID)
+					list.push({ ...deviceBase, password: Crypto.encrypt(password) })
+					this.saveDeviceList(list)
+					// setCurrentDevice expects raw password and encrypts internally
+					this.setCurrentDevice({ ...deviceBase, password })
+					callback({ success: true, sysauth: session })
+				} else {
+					callback({ success: false, errorCode: ERROR_CODES.AUTH_ERROR })
+				}
+			},
+			fail: (err) => {
+				let errorCode = ERROR_CODES.NETWORK_ERROR
+				if (err.errMsg && err.errMsg.toLowerCase().includes('certificate')) {
+					errorCode = ERROR_CODES.CERTIFICATE_ERROR
+				}
+				callback({ success: false, errorCode })
+			}
+		})
+	}
+
 	/**
 	 * Check device connection status
 	 */

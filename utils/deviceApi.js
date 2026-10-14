@@ -1,4 +1,3 @@
-
 import GlobalState from './globalState.js'
 import DeviceManager from './deviceManager.js'
 
@@ -12,7 +11,8 @@ class DeviceApi {
 			}
 			
 			const formattedHost = DeviceManager.formatHostForUrl(device.ip)
-			const url = `http://${formattedHost}:${device.port}/cgi-bin/luci/admin/status/overview`
+			const protocol = device.useHttps ? 'https' : 'http'
+			const url = `${protocol}://${formattedHost}:${device.port}/cgi-bin/luci/admin/status/overview`
 			const response = await DeviceManager.requestWithAuth(device, url)
 			
 			return response
@@ -30,7 +30,8 @@ class DeviceApi {
 			}
 			
 			const formattedHost = DeviceManager.formatHostForUrl(device.ip)
-			const url = `http://${formattedHost}:${device.port}/cgi-bin/luci/admin/network/network`
+			const protocol = device.useHttps ? 'https' : 'http'
+			const url = `${protocol}://${formattedHost}:${device.port}/cgi-bin/luci/admin/network/network`
 			const response = await DeviceManager.requestWithAuth(device, url)
 			
 			return response
@@ -47,7 +48,8 @@ class DeviceApi {
 			}
 			
 			const formattedHost = DeviceManager.formatHostForUrl(device.ip)
-			const url = `http://${formattedHost}:${device.port}/cgi-bin/luci/admin/status/overview`
+			const protocol = device.useHttps ? 'https' : 'http'
+			const url = `${protocol}://${formattedHost}:${device.port}/cgi-bin/luci/admin/status/overview`
 			const response = await DeviceManager.requestWithAuth(device, url)
 			
 			return response
@@ -65,7 +67,8 @@ class DeviceApi {
 			}
 			
 			const formattedHost = DeviceManager.formatHostForUrl(device.ip)
-			const url = `http://${formattedHost}:${device.port}/cgi-bin/luci/admin/system/admin`
+			const protocol = device.useHttps ? 'https' : 'http'
+			const url = `${protocol}://${formattedHost}:${device.port}/cgi-bin/luci/admin/system/admin`
 			const response = await DeviceManager.requestWithAuth(device, url)
 			
 			return response
@@ -83,7 +86,8 @@ class DeviceApi {
 			}
 			
 			const formattedHost = DeviceManager.formatHostForUrl(device.ip)
-			const url = `http://${formattedHost}:${device.port}${path}`
+			const protocol = device.useHttps ? 'https' : 'http'
+			const url = `${protocol}://${formattedHost}:${device.port}${path}`
 			const response = await DeviceManager.requestWithAuth(device, url, options)
 			
 			return response
@@ -119,4 +123,4 @@ class DeviceApi {
 	}
 }
 
-export default DeviceApi 
+export default DeviceApi
